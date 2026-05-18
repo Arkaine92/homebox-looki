@@ -3,10 +3,9 @@
 FROM node:18-alpine as frontend-builder
 WORKDIR  /app
 RUN npm install -g pnpm
-COPY frontend/package.json frontend/pnpm-lock.yaml ./
+COPY frontend .
 #RUN pnpm install --frozen-lockfile --shamefully-hoist
 RUN rm -f pnpm-lock.yaml && pnpm install --shamefully-hoist
-COPY frontend .
 RUN pnpm build
 
 # Build API
